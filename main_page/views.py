@@ -11,7 +11,7 @@ def main(request):
     chefs = Chefs.objects.all()
     feedback = Feedback.objects.all()
             
-    return render(request, 'index.html', context={
+    return render(request, 'main_page.html', context={
             'categories': categories,
             'dishes': dishes,
             'whyus': whyus,
