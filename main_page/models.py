@@ -18,15 +18,12 @@ class Category(models.Model):
     position = models.SmallIntegerField(unique = True)
     is_visible = models.BooleanField(default = True)
     
+    
     def __str__(self) -> str:
         return f'{self.title}'
     
     class Meta:
         ordering = ('position', )
-        
-    def __iter__(self):
-        for i in self.dishes.all():
-            yield i
     
 
 class Dish(models.Model):

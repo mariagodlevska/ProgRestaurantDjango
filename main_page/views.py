@@ -1,21 +1,23 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Category, Dish, WhyUs, Events, PhotoGallery, Chefs, Feedback
 
-# Create your views here.
 
 def main(request):
-    categories = Category.object.all()
-    dishes = Dish.object.all()
-    for i in categories:
-        for dish in i:
-            print(dish)
+    categories = Category.objects.filter(is_visible=True)
+    dishes = Dish.objects.all()
+    whyus = WhyUs.objects.all()
+    events = Events.objects.all()
+    photogallery = PhotoGallery.objects.all()
+    chefs = Chefs.objects.all()
+    feedback = Feedback.objects.all()
             
-    res_1 = f"Categories: {'; '.join(map(str, categories))}"
-    res_2 = f"Dishes: {'; '.join(map(str, dishes))}"
-    
-    
-    return HttpResponse(
-        res_1 + '\n' + res_2
-    )
+    return render(request, 'index.html', context={
+            'categories': categories,
+            'dishes': dishes,
+            'whyus': whyus,
+            'events': events,
+            'photogallery': photogallery,
+            'chefs': chefs,
+            'feedback': feedback         
+        })
     
